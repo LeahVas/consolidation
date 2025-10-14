@@ -10,26 +10,30 @@
     <header>
         <h2>My Profile</h2>
     </header>
-      <main class="profile">
-    <div class="profile-info">
-      <img src="img/avatar.jpg" alt="Avatar" class="avatar">
-      <h2>Leah</h2>
-      <p class="status">💬 I get inspired by frontend!</p>
-      <button id="change-status">Change status</button>
-    </div>
 
-    <div class="about">
+    <main class="profile">
+       <section class="profile-section">
+         <img src="img/avatar.jpg" alt="Avatar" class="avatar">
+         <h2>Leah</h2>
+         <p class="status">💬 I get inspired by frontend!</p>
+         <button id="change-status">Change status</button>
+       </section>
+
+    <section class="about">
       <h3>About me</h3>
       <p>I'm learning front-end development. I love plants and beautiful aesthetics. 🌿</p>
-    </div>
+    </section>
 
-    <div class="posts">
+    <section class="posts">
+      <div class="posts-header">
       <h3>My posts</h3>
+      <button id="add-post-btn">Add post</button>
+      </div>
       <div class="post">
         <p>Today I started a new project! 🚀</p>
         <button class="like-btn">♥️ 0</button>
       </div>
-    </div>
+    </section>
   </main>
     <script src="script.js"></script>
 </body>
