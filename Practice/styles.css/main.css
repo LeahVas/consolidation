@@ -8,18 +8,19 @@ body {
 
 
 header {
-  background: rgba(255, 255, 255, 0.6); /* почти белый, слегка прозрачный */
+  background: rgba(255, 255, 255, 0.6);
   color: #0c2d74;
-  padding: 10px 0;
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
+  padding: 10px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   backdrop-filter: blur(10px);
-  position: sticky; /* фиксируем header при прокрутке */
+  position: sticky;
   top: 0;
-  z-index: 10; /* чтобы header был поверх других элементов */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4); /* легкая граница снизу */
+  z-index: 10;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  font-weight: bold;
 }
 /* Добавляем легкий градиент для современного вида */
 header::before {
@@ -33,6 +34,39 @@ header::before {
 }
 
 
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: #0c2d74;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: #1861ff;
+}z
+.logo {
+  font-size: 22px;
+  color: #0c2d74;
+}
+
+.logout-btn {
+  background:  #0c2d74;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+} 
+.logout-btn:hover {
+  background: #1861ff;
+}
 
 main.profile {
   width: 90%;
@@ -41,7 +75,7 @@ main.profile {
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  margin: 80px auto 60px; /* ↑ больше расстояние от header */
+  margin: 100px auto 60px; /* ↑ больше расстояние от header */
   display: flex;
   flex-direction: column; /* элементы располагаются вертикально */
   gap: 30px; /* Отступы между элементами */

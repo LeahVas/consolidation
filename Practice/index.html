@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile</title>
-    <link rel="stylesheet" href="styles.css/main.css">
-</head>
-<body>
-    <header>
-        <h2>My Profile</h2>
-    </header>
 
-    <main class="profile">
-       <section class="profile-section">
-         <img src="img/avatar.jpg" alt="Avatar" class="avatar">
-         <h2>Leah</h2>
-         <p class="status">💬 I get inspired by frontend!</p>
-         <button id="change-status">Change status</button>
-       </section>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile</title>
+  <link rel="stylesheet" href="styles.css/main.css">
+</head>
+
+<body>
+  <header>
+    <div class="logo">My Profile</div>
+
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Gallery</a>
+      <a href="#">Satting</a>
+    </nav>
+
+    <button class="logout-btn">Log out</button>
+  </header>
+
+  <main class="profile">
+    <section class="profile-section">
+      <img src="img/avatar.jpg" alt="Avatar" class="avatar">
+      <h2>Leah</h2>
+      <p class="status">💬 I get inspired by frontend!</p>
+      <button id="change-status">Change status</button>
+    </section>
 
     <section class="about">
       <h3>About me</h3>
@@ -26,8 +36,8 @@
 
     <section class="posts">
       <div class="posts-header">
-      <h3>My posts</h3>
-      <button id="add-post-btn">Add post</button>
+        <h3>My posts</h3>
+        <button id="add-post-btn">Add post</button>
       </div>
       <div class="post">
         <p>Today I started a new project! 🚀</p>
@@ -35,6 +45,7 @@
       </div>
     </section>
   </main>
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
