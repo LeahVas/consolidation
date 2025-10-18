@@ -10,21 +10,27 @@ body {
 header {
   background: rgba(255, 255, 255, 0.6);
   color: #0c2d74;
-  padding: 10px 40px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   position: sticky;
   top: 0;
   z-index: 10;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-  font-weight: bold;
+  box-sizing: border-box;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  left: 0;
+  right: 0;
 }
+
 /* Добавляем легкий градиент для современного вида */
 header::before {
-  content: ''; /* создает пустой элемент */
+  content: '';
+  /* создает пустой элемент */
   position: absolute;
   top: 0;
   left: 0;
@@ -48,14 +54,16 @@ header::before {
 
 .nav-links a:hover {
   color: #1861ff;
-}z
+}
+
 .logo {
   font-size: 22px;
   color: #0c2d74;
+  margin-right: auto;
 }
 
 .logout-btn {
-  background:  #0c2d74;
+  background: #0c2d74;
   color: white;
   border: none;
   border-radius: 6px;
@@ -63,7 +71,8 @@ header::before {
   cursor: pointer;
   font-weight: bold;
   transition: 0.3s;
-} 
+}
+
 .logout-btn:hover {
   background: #1861ff;
 }
@@ -71,22 +80,14 @@ header::before {
 main.profile {
   width: 90%;
   max-width: 700px;
-  background: rgba(255, 255, 255, 0.9);/* почти белый, слегка прозрачный */
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 15px;
   padding: 30px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  margin: 100px auto 60px; /* ↑ больше расстояние от header */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  margin: 100px auto 60px;
   display: flex;
-  flex-direction: column; /* элементы располагаются вертикально */
-  gap: 30px; /* Отступы между элементами */
-}
-
-.profile-section {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  text-align: center;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .profile-section,
@@ -95,17 +96,20 @@ main.profile {
   background: white;
   border-radius: 15px;
   padding: 25px;
-  box-shadow: 0 3px 15px rgba(0,0,0,0.1);
-}   
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+}
 
+.profile-section {
+  text-align: center;
+}
 
 .avatar {
   width: 100%;
   height: auto;
-  border-radius: 15px; /* чуть скруглённые углы вместо круга */
-  border: 3px solid  #fff; /* белая рамка вокруг фото */
+  border-radius: 15px;
+  border: 3px solid #fff;
   margin-bottom: 15px;
-  object-fit: cover; /* <-- делает фото аккуратным */
+  object-fit: cover;
 }
 
 button {
@@ -121,20 +125,6 @@ button {
 
 button:hover {
   background-color: #1861ff;
-}
-
-.about {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.posts {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .posts-header {
@@ -164,6 +154,101 @@ button:hover {
   padding: 6px 10px;
   border-radius: 6px;
 }
+
 .like-btn:hover {
   background: #ffe0e0;
+}
+
+/* Скрываем кнопку меню на больших экранах */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #0c2d74;
+  padding: 5px;
+}
+
+/* Стили для контейнера навигации */
+.nav-container {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-container {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0 !important;
+    transform: none !important;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+  }
+
+  .nav-container.active {
+    display: flex;
+  }
+  .logout-btn {
+    display: none;
+  }
+
+  .nav-container::after {
+    content: 'Log out';
+    display: block;
+    background: #0c2d74;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links a {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px;
+  }
+}
+
+/* Медиа-запрос для очень маленьких экранов */
+@media (max-width: 480px) {
+  header {
+    padding: 10px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
 }
