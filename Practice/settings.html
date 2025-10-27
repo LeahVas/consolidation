@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings</title>
+    <link rel="stylesheet" href="CSS/themes.css">
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/settings.css">
+</head>
+
+<body data-theme="light">
+    <header>
+        <div class="logo">Settings</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+    </header>
+
+    <main class="settings">
+        <section class="theme-section">
+            <h2>Theme</h2>
+            <label for="theme">Choose theme:</label>
+            <select id="theme">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="neutral">Neutral</option>
+            </select>
+        </section>
+
+        <section class="user-section">
+            <h2>👤 Profile info</h2>
+            <label for="username">Name:</label>
+            <input type="text" id="username" placeholder="Enter your name">
+
+            <label for="about">About me:</label>
+            <textarea id="about" rows="4" placeholder="Write something about yourself..."></textarea>
+
+            <button id="saveProfile">Save changes</button>
+        </section>
+    </main>
+
+    <script src="JS/main.js"></script>
+</body>
+
+</html>

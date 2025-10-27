@@ -57,14 +57,12 @@ header {
 
 /* Добавляем легкий градиент для современного вида */
 header::before {
-  content: '';
   /* создает пустой элемент */
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #1861ff, #732ea1);
 }
 
 
