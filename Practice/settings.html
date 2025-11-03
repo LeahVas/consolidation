@@ -2,48 +2,58 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Settings</title>
-    <link rel="stylesheet" href="CSS/themes.css">
-    <link rel="stylesheet" href="CSS/main.css">
-    <link rel="stylesheet" href="CSS/settings.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings — My Profile</title>
+  <link rel="stylesheet" href="CSS/setting.css" />
 </head>
 
-<body data-theme="light">
-    <header>
-        <div class="logo">Settings</div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="gallery.html">Gallery</a>
-            <a href="settings.html">Settings</a>
-        </nav>
-    </header>
+<body>
+  <header class="navbar">
+    <div class="container">
+      <button class="menu-toggle" id="menuToggle">☰</button>
+      <nav id="navContainer" class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+      </nav>
+      <button class="logout-btn">Log out</button>
+    </div>
+  </header>
 
-    <main class="settings">
-        <section class="theme-section">
-            <h2>Theme</h2>
-            <label for="theme">Choose theme:</label>
-            <select id="theme">
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-                <option value="neutral">Neutral</option>
-            </select>
-        </section>
+  <main class="settings-page">
+    <div class="settings-container">
 
-        <section class="user-section">
-            <h2>👤 Profile info</h2>
-            <label for="username">Name:</label>
-            <input type="text" id="username" placeholder="Enter your name">
+      <!-- Theme Card -->
+      <section class="card">
+        <h2>Theme</h2>
+        <div class="theme-selector">
+          <label for="theme">Select theme:</label>
+          <select id="theme">
+            <option value="light">☀️ Light</option>
+            <option value="dark">🌙 Dark</option>
+            <option value="neutral">🌿 Neutral</option>
+          </select>
+        </div>
+      </section>
 
-            <label for="about">About me:</label>
-            <textarea id="about" rows="4" placeholder="Write something about yourself..."></textarea>
+      <!-- Name Card -->
+      <section class="card">
+        <h2>Name</h2>
+        <input type="text" id="username" placeholder="Enter your name" />
+        <button id="saveName" class="save-btn">Change name</button>
+      </section>
 
-            <button id="saveProfile">Save changes</button>
-        </section>
-    </main>
+      <!-- About Card -->
+      <section class="card">
+        <h2>About me</h2>
+        <textarea id="about" placeholder="Tell something about yourself..."></textarea>
+        <button id="saveAbout" class="save-btn">Change about me</button>
+      </section>
 
-    <script src="JS/main.js"></script>
+    </div>
+  </main>
+
+  <script src="JS/main.js"></script>
 </body>
 
 </html>
