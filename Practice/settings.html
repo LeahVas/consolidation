@@ -1,59 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Settings — My Profile</title>
-  <link rel="stylesheet" href="CSS/setting.css" />
+  <link rel="stylesheet" href="CSS/main.css">
+  <link rel="stylesheet" href="CSS/profile.css">
 </head>
 
 <body>
-  <header class="navbar">
-    <div class="container">
-      <button class="menu-toggle" id="menuToggle">☰</button>
-      <nav id="navContainer" class="nav-links">
+  <!-- Хедер ДОЛЖЕН БЫТЬ ПЕРВЫМ -->
+  <header>
+    <div class="logo">My Profile</div>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <nav class="nav-container" id="navContainer">
+      <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="gallery.html">Gallery</a>
-      </nav>
-      <button class="logout-btn">Log out</button>
-    </div>
+        <a href="#">Gallery</a>
+        <a href="settings.html" class="active">Settings</a>
+      </div>
+    </nav>
+    <button class="logout-btn">Log out</button>
   </header>
 
-  <main class="settings-page">
-    <div class="settings-container">
+  <!-- Основное содержимое -->
+  <main class="settings-container">
+    <!-- Карточка выбора темы ВНУТРИ основного контента -->
+    <section class="settings-card">
+      <h3>🎨 Theme</h3>
+      <label for="theme">Choose theme:</label>
+      <select id="theme">
+        <option value="light">Light</option>
+        <option value="neutral">Neutral</option>
+        <option value="dark">Dark</option>
+      </select>
+    </section>
 
-      <!-- Theme Card -->
-      <section class="card">
-        <h2>Theme</h2>
-        <div class="theme-selector">
-          <label for="theme">Select theme:</label>
-          <select id="theme">
-            <option value="light">☀️ Light</option>
-            <option value="dark">🌙 Dark</option>
-            <option value="neutral">🌿 Neutral</option>
-          </select>
-        </div>
-      </section>
+    <section class="settings-card">
+      <h3>👤 Profile info</h3>
+      <label for="username">Name:</label>
+      <input type="text" id="username" placeholder="Enter your name">
 
-      <!-- Name Card -->
-      <section class="card">
-        <h2>Name</h2>
-        <input type="text" id="username" placeholder="Enter your name" />
-        <button id="saveName" class="save-btn">Change name</button>
-      </section>
+      <label for="about">About me:</label>
+      <textarea id="about" rows="3" placeholder="Write something about yourself..."></textarea>
 
-      <!-- About Card -->
-      <section class="card">
-        <h2>About me</h2>
-        <textarea id="about" placeholder="Tell something about yourself..."></textarea>
-        <button id="saveAbout" class="save-btn">Change about me</button>
-      </section>
-
-    </div>
+      <button id="saveProfile" class="save-btn">💾 Save changes</button>
+    </section>
   </main>
 
   <script src="JS/main.js"></script>
 </body>
-
 </html>

@@ -5,27 +5,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Profile</title>
-  <link rel="stylesheet" href="CSS/themes.css">
   <link rel="stylesheet" href="CSS/main.css">
   <link rel="stylesheet" href="CSS/profile.css">
 </head>
 
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const displayName = document.getElementById('displayName');
+    const displayAbout = document.getElementById('displayAbout');
+
+    const savedName = localStorage.getItem('profileName');
+    const savedAbout = localStorage.getItem('profileAbout');
+
+    if (savedName) displayName.textContent = savedName;
+    if (savedAbout) displayAbout.textContent = savedAbout;
+  });
+</script>
+
 <body>
-
-
   <header>
     <div class="logo">My Profile</div>
 
     <button class="menu-toggle" id="menuToggle">☰</button>
 
     <nav class="nav-container" id="navContainer">
-        <div class="nav-links">
+      <div class="nav-links">
         <a href="#">Home</a>
         <a href="#">Gallery</a>
         <a href="settings.html">Satting</a>
       </div>
     </nav>
-    
+
     <button class="logout-btn">Log out</button>
 
   </header>
@@ -34,11 +44,11 @@
     <section class="profile-section">
       <img src="img/avatar.jpg" alt="Avatar" class="avatar">
       <h2 id="displayName">Leah</h2>
-      <p id="displayAbout" class="status">💬 I get inspired by frontend!</p>
+      <p id="displayStatus" class="status">💬 I get inspired by frontend!</p>
       <button id="change-status">Change status</button>
     </section>
 
-    <section>
+    <section class="about-section">
       <h3>About me</h3>
       <p id="displayAbout">I'm learning front end development. I love plants and beautiful aesthetics. 🌿</p>
     </section>
@@ -57,4 +67,4 @@
   <script src="JS/main.js"></script>
 </body>
 
-</html> 
+</html>

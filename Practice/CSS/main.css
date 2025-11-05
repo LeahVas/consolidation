@@ -1,95 +1,103 @@
-/* ===== БАЗОВЫЙ СТИЛЬ ДЛЯ ВСЕГО САЙТА ===== */
+/* ===== ОСНОВНЫЕ ПЕРЕМЕННЫЕ И СТИЛИ ===== */
+:root {
+  /* СВЕТЛАЯ ТЕМА - нежная и теплая */
+  --bg-color: #f8f5f2;          /* теплый бежевый фон */
+  --text-color: #4a4a4a;        /* мягкий темно-серый */
+  --card-color: #ffffff;        /* чистый белый */
+  --accent-color: #d4a5a5;      /* нежно-розовый */
+  --border-color: #f0e6e6;      /* светлая граница */
+}
+
+[data-theme="dark"] {
+  /* ТЕМНАЯ ТЕМА - уютная */
+  --bg-color: #2a2a2a;          /* темно-серый */
+  --text-color: #e8e6e3;        /* теплый светлый текст */
+  --card-color: #3a3a3a;        /* карточки чуть светлее */
+  --accent-color: #a6b4ce;      /* пастельный сиреневый */
+  --border-color: #555555;      /* темная граница */
+}
+
+[data-theme="neutral"] {
+  --bg-color: linear-gradient(135deg, #2f2f2f 0%, #5f5f5f 50%, #cfcfcf 100%);
+  --text-color: #333333;
+  --card-color: rgba(255, 255, 255, 0.95);
+  --accent-color: #4a4a4a;
+  --border-color: #999999;
+}
+
+/* ===== БАЗОВЫЕ СТИЛИ ===== */
 body {
-  background-color: var(--bg-color);
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg-color); /* Теперь поддерживает градиент */
   color: var(--text-color);
-  font-family: "Poppins", Arial, sans-serif;
-  transition: background-color 0.4s, color 0.4s;
+  min-height: 100vh;
+  transition: background 0.4s, color 0.4s;
+  background-attachment: fixed; /* Чтобы градиент был на весь экран */
 }
 
-/* Карточки, блоки, контейнеры */
-.card, .post, .section, .profile-box {
-  background-color: var(--card-color);
-  color: var(--text-color);
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  transition: background-color 0.4s, color 0.4s;
-}
-
-/* Акценты — кнопки, ссылки, активные элементы */
-a, button, .accent {
-  color: var(--accent-color);
-  transition: color 0.3s, background-color 0.3s;
-}
-
-button {
-  background-color: var(--accent-color);
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-button:hover {
-  opacity: 0.9;
-}
-
-
+/* ===== ОБЩИЙ HEADER ДЛЯ ВСЕХ СТРАНИЦ ===== */
 header {
-  background: rgba(255, 255, 255, 0.6);
-  color: #0c2d74;
+  background: var(--card-color);
+  color: var(--text-color);
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 10;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid var(--border-color);
+  width: 100%;
   box-sizing: border-box;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  left: 0;
-  right: 0;
 }
 
-/* Добавляем легкий градиент для современного вида */
+/* Убираем старую градиентную линию */
 header::before {
-  /* создает пустой элемент */
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
+  display: none;
 }
 
+/* Логотип */
+.logo {
+  font-size: 22px;
+  color: var(--text-color);
+  font-weight: bold;
+}
 
+/* Контейнер навигации - ПРОСТОЙ И НАДЕЖНЫЙ */
+.nav-container {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Ссылки навигации */
 .nav-links {
   display: flex;
   gap: 25px;
 }
 
 .nav-links a {
-  color: #0c2d74;
+  color: var(--text-color);
   text-decoration: none;
   font-weight: bold;
   transition: 0.3s;
+  padding: 5px 10px;
+  border-radius: 6px;
 }
 
 .nav-links a:hover {
-  color: #1861ff;
+  color: var(--accent-color);
+  background: rgba(0,0,0,0.05);
 }
 
-.logo {
-  font-size: 22px;
-  color: #0c2d74;
-  margin-right: auto;
-}
-
+/* Кнопка выхода */
 .logout-btn {
-  background: #0c2d74;
+  background: var(--accent-color);
   color: white;
   border: none;
   border-radius: 6px;
@@ -100,100 +108,73 @@ header::before {
 }
 
 .logout-btn:hover {
-  background: #1861ff;
+  opacity: 0.9;
 }
 
-
-/* Скрываем кнопку меню на больших экранах */
+/* Кнопка меню */
 .menu-toggle {
   display: none;
   background: none;
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: #0c2d74;
+  color: var(--text-color);
   padding: 5px;
 }
 
-/* Стили для контейнера навигации */
-.nav-container {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-/* Адаптивность для мобильных */
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
   }
-
+  
   .nav-container {
     display: none;
     position: absolute;
     top: 100%;
-    left: 0 !important;
-    transform: none !important;
+    left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    background: var(--card-color);
     flex-direction: column;
     padding: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    border-top: 1px solid rgba(255, 255, 255, 0.4);
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   }
-
+  
   .nav-container.active {
     display: flex;
   }
+  
+  .nav-links {
+    flex-direction: column;
+    position: static;
+    transform: none;
+    gap: 15px;
+  }
+  
   .logout-btn {
     display: none;
   }
-
-  .nav-container::after {
-    content: 'Log out';
-    display: block;
-    background: #0c2d74;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 10px;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    width: 100%;
-    text-align: center;
-  }
-
-  .nav-links a {
-    padding: 10px 0;
-    border-bottom: 1px solid #f0f0f0;
-  }
-
-  header {
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 15px;
-  }
 }
 
-/* Медиа-запрос для очень маленьких экранов */
-@media (max-width: 480px) {
-  header {
-    padding: 10px;
-  }
+/* ===== СТИЛИ ДЛЯ ВЫБОРА ТЕМЫ ===== */
+.settings-card select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--card-color);
+  color: var(--text-color);
+  font-size: 16px;
+  margin-bottom: 20px;
+}
 
-  .logo {
-    font-size: 18px;
-  }
+.settings-card select:focus {
+  border-color: var(--accent-color);
+  outline: none;
+}
+
+.settings-card label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: var(--text-color);
 }
