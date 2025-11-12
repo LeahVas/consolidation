@@ -18,22 +18,23 @@
 }
 
 [data-theme="neutral"] {
-  --bg-color: linear-gradient(135deg, #2f2f2f 0%, #5f5f5f 50%, #cfcfcf 100%);
-  --text-color: #333333;
-  --card-color: rgba(255, 255, 255, 0.95);
-  --accent-color: #4a4a4a;
-  --border-color: #999999;
+  /* НЕЙТРАЛЬНАЯ ТЕМА - тёмно-бежевые карточки */
+  --bg-color: linear-gradient(135deg, #8b7355 0%, #d2b48c 50%, #f5f5dc 100%);
+  --text-color: #5d4037;        /* тёмно-коричневый текст */
+  --card-color: #a1887f;        /* тёмно-бежевый для карточек */
+  --accent-color: #8d6e63;      /* бежево-коричневый акцент */
+  --border-color: #bcaaa4;      /* светлый бежевый для границ */
 }
 
 /* ===== БАЗОВЫЕ СТИЛИ ===== */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: var(--bg-color); /* Теперь поддерживает градиент */
+  background: var(--bg-color);
   color: var(--text-color);
   min-height: 100vh;
   transition: background 0.4s, color 0.4s;
-  background-attachment: fixed; /* Чтобы градиент был на весь экран */
+  background-attachment: fixed;
 }
 
 /* ===== ОБЩИЙ HEADER ДЛЯ ВСЕХ СТРАНИЦ ===== */
@@ -53,11 +54,6 @@ header {
   box-sizing: border-box;
 }
 
-/* Убираем старую градиентную линию */
-header::before {
-  display: none;
-}
-
 /* Логотип */
 .logo {
   font-size: 22px;
@@ -65,7 +61,7 @@ header::before {
   font-weight: bold;
 }
 
-/* Контейнер навигации - ПРОСТОЙ И НАДЕЖНЫЙ */
+/* Контейнер навигации */
 .nav-container {
   display: flex;
   align-items: center;
@@ -122,6 +118,7 @@ header::before {
   padding: 5px;
 }
 
+/* Адаптивность */
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
@@ -153,28 +150,4 @@ header::before {
   .logout-btn {
     display: none;
   }
-}
-
-/* ===== СТИЛИ ДЛЯ ВЫБОРА ТЕМЫ ===== */
-.settings-card select {
-  width: 100%;
-  padding: 10px;
-  border: 2px solid var(--border-color);
-  border-radius: 8px;
-  background: var(--card-color);
-  color: var(--text-color);
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-.settings-card select:focus {
-  border-color: var(--accent-color);
-  outline: none;
-}
-
-.settings-card label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: var(--text-color);
 }

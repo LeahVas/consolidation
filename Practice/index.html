@@ -44,7 +44,7 @@
     <section class="profile-section">
       <img src="img/avatar.jpg" alt="Avatar" class="avatar">
       <h2 id="displayName">Leah</h2>
-      <p id="displayStatus" class="status">💬 I get inspired by frontend!</p>
+      <p id="displayStatus" class="status">I get inspired by frontend!</p>
       <button id="change-status">Change status</button>
     </section>
 
@@ -54,13 +54,23 @@
     </section>
 
     <section class="posts">
-      <div class="posts-header">
+      <div class="posts-header-with-button">
         <h3>My posts</h3>
-        <button id="add-post-btn">Add post</button>
+        <button id="add-post-btn" class="add-post-btn">Add post</button>
       </div>
-      <div class="post">
-        <p>Today I started a new project! 🚀</p>
-        <button class="like-btn">♥️ 0</button>
+      <!-- Контейнер для динамических постов -->
+      <div class="posts-list">
+        <!-- Статические посты для примера -->
+        <div class="post">
+          <button class="delete-post-btn">🗑️</button>
+          <p>Today I started a new project!</p>
+          <button class="like-btn">❤️ 0</button>
+        </div>
+        <div class="post">
+          <button class="delete-post-btn">🗑️</button>
+          <p>Working on my new programming project!</p>
+          <button class="like-btn">❤️ 3</button>
+        </div>
       </div>
     </section>
   </main>

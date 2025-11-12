@@ -1,5 +1,15 @@
 // main.js — исправленная надёжная версия
 document.addEventListener('DOMContentLoaded', () => {
+
+  // Инициализация начальных постов, если их нет
+  if (!localStorage.getItem('myProfilePostsV1')) {
+    const initialPosts = [
+      { text: "Today I started a new project!", image: null, likes: 0, created: Date.now() },
+      { text: "Working on my new programming project!", image: null, likes: 3, created: Date.now() - 100000 }
+    ];
+    localStorage.setItem('myProfilePostsV1', JSON.stringify(initialPosts));
+  }
+
   /* -------------------------
      0) Тема
   ------------------------- */
@@ -87,26 +97,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* -------------------------
-     4) Посты + фото (локально)
+     4) Посты + фото (локально) с удалением - ИСПРАВЛЕННАЯ ВЕРСИЯ
   ------------------------- */
   const POSTS_KEY = 'myProfilePostsV1';
   const postsSection = document.querySelector('.posts');
 
   if (postsSection) {
-    // создаём контейнер списка постов, если его нет
     let postsList = postsSection.querySelector('.posts-list');
-    if (!postsList) {
-      postsList = document.createElement('div');
-      postsList.className = 'posts-list';
-      const header = postsSection.querySelector('.posts-header');
-      if (header && header.nextSibling) header.parentNode.insertBefore(postsList, header.nextSibling);
-      else postsSection.appendChild(postsList);
-    }
 
     function loadPosts() {
       const raw = localStorage.getItem(POSTS_KEY);
       return raw ? JSON.parse(raw) : [];
     }
+
     function savePosts(posts) {
       localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
     }
@@ -115,22 +118,76 @@ document.addEventListener('DOMContentLoaded', () => {
       return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
+    // Функция для преобразования статических постов в данные
+    function getStaticPosts() {
+      const staticPosts = [];
+      const staticPostElements = postsList.querySelectorAll('.post');
+
+      staticPostElements.forEach((postEl, index) => {
+        const text = postEl.querySelector('p').textContent;
+        const likesText = postEl.querySelector('.like-btn').textContent;
+        const likes = parseInt(likesText.match(/\d+/)) || 0;
+
+        staticPosts.push({
+          text: text,
+          image: null,
+          likes: likes,
+          created: Date.now() - (staticPostElements.length - index) * 100000,
+        });
+      });
+
+      return staticPosts;
+    }
+
+    // Инициализация постов при первом запуске
+    function initializePosts() {
+      const existingPosts = loadPosts();
+      if (existingPosts.length === 0) {
+        const staticPosts = getStaticPosts();
+        savePosts(staticPosts);
+      }
+    }
+
     function renderPosts() {
       const posts = loadPosts();
       postsList.innerHTML = '';
+
       if (posts.length === 0) {
-        postsList.innerHTML = '<p style="color:#666">Пока нет постов — добавь первый!</p>';
+        postsList.innerHTML = '<p style="color:#666; padding: 20px; text-align: center;">Пока нет постов — добавь первый!</p>';
         return;
       }
-      // newest first
-      for (let i = posts.length - 1; i >= 0; i--) {
-        const p = posts[i];
+
+      // Отображаем посты от новых к старым
+      const sortedPosts = [...posts].sort((a, b) => b.created - a.created);
+
+      sortedPosts.forEach((p, displayIndex) => {
         const postEl = document.createElement('div');
         postEl.className = 'post';
-        postEl.dataset.index = i;
-        const imgHtml = p.image ? `<div class="post-img-wrap"><img src="${p.image}" alt="photo" style="max-width:100%; border-radius:8px; margin-top:10px;"></div>` : '';
-        postEl.innerHTML = `<p>${escapeHtml(p.text)}</p>${imgHtml}<button class="like-btn">♥️ ${p.likes}</button>`;
+        // Сохраняем ОРИГИНАЛЬНЫЙ индекс из массива posts
+        const originalIndex = posts.indexOf(p);
+        postEl.dataset.originalIndex = originalIndex;
+
+        const imgHtml = p.image ?
+          `<div class="post-img-wrap"><img src="${p.image}" alt="photo" style="max-width:100%; border-radius:8px; margin-top:10px;"></div>` : '';
+
+        postEl.innerHTML = `
+                <button class="delete-post-btn" data-original-index="${originalIndex}">🗑️</button>
+                <p>${escapeHtml(p.text)}</p>
+                ${imgHtml}
+                <button class="like-btn">❤️ ${p.likes}</button>
+            `;
         postsList.appendChild(postEl);
+      });
+    }
+
+    // Функция удаления поста
+    function deletePost(originalIndex) {
+      const posts = loadPosts();
+
+      if (confirm('Вы уверены, что хотите удалить этот пост?')) {
+        posts.splice(originalIndex, 1);
+        savePosts(posts);
+        renderPosts();
       }
     }
 
@@ -138,7 +195,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (addPostBtn) {
       addPostBtn.addEventListener('click', () => {
         const text = prompt('Введите текст поста:');
-        if (text === null) return;
+        if (text === null || text.trim() === '') return;
+
         const wantPhoto = confirm('Добавить фото к посту? (OK — да, Отмена — нет)');
         if (wantPhoto) {
           const fileInput = document.createElement('input');
@@ -146,9 +204,14 @@ document.addEventListener('DOMContentLoaded', () => {
           fileInput.accept = 'image/*';
           fileInput.onchange = () => {
             const file = fileInput.files[0];
-            if (!file) { createAndSavePost(text, null); return; }
+            if (!file) {
+              createAndSavePost(text, null);
+              return;
+            }
             const reader = new FileReader();
-            reader.onload = function(e) { createAndSavePost(text, e.target.result); };
+            reader.onload = function (e) {
+              createAndSavePost(text, e.target.result);
+            };
             reader.readAsDataURL(file);
           };
           fileInput.click();
@@ -160,22 +223,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createAndSavePost(text, base64image) {
       const posts = loadPosts();
-      posts.push({ text: text.trim(), image: base64image, likes: 0, created: Date.now() });
+      posts.push({
+        text: text.trim(),
+        image: base64image,
+        likes: 0,
+        created: Date.now()
+      });
       savePosts(posts);
       renderPosts();
     }
 
+    // Обработчики для лайков и удаления - ИСПРАВЛЕННЫЕ
     postsList.addEventListener('click', (e) => {
-      if (!e.target.classList.contains('like-btn')) return;
-      const postEl = e.target.closest('.post');
-      const index = parseInt(postEl.dataset.index, 10);
-      const posts = loadPosts();
-      posts[index].likes += 1;
-      savePosts(posts);
-      renderPosts();
+      if (e.target.classList.contains('like-btn')) {
+        const postEl = e.target.closest('.post');
+        const originalIndex = parseInt(postEl.dataset.originalIndex, 10);
+        const posts = loadPosts();
+
+        // Используем ОРИГИНАЛЬНЫЙ индекс для точного нахождения поста
+        if (posts[originalIndex]) {
+          posts[originalIndex].likes += 1;
+          savePosts(posts);
+          renderPosts();
+        }
+      }
+
+      if (e.target.classList.contains('delete-post-btn')) {
+        const originalIndex = parseInt(e.target.dataset.originalIndex, 10);
+        deletePost(originalIndex);
+      }
     });
 
+    // Инициализируем и рендерим посты
+    initializePosts();
     renderPosts();
   }
 
-}); // end DOMContentLoaded
+});
