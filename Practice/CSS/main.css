@@ -1,29 +1,38 @@
 /* ===== ОСНОВНЫЕ ПЕРЕМЕННЫЕ И СТИЛИ ===== */
 :root {
   /* СВЕТЛАЯ ТЕМА - нежная и теплая */
-  --bg-color: #f8f5f2;          /* теплый бежевый фон */
-  --text-color: #4a4a4a;        /* мягкий темно-серый */
-  --card-color: #ffffff;        /* чистый белый */
-  --accent-color: #d4a5a5;      /* нежно-розовый */
-  --border-color: #f0e6e6;      /* светлая граница */
+  --bg-color: #f8f5f2;
+  --text-color: #4a4a4a;
+  --card-color: #ffffff;
+  --accent-color: #d4a5a5;
+  --border-color: #f0e6e6;
+  --button-color: #e8e8e8; /* Серая кнопка для светлой темы */
+  --button-text-color: #4a4a4a;
+  --button-hover-color: #d8d8d8;
 }
 
 [data-theme="dark"] {
   /* ТЕМНАЯ ТЕМА - уютная */
-  --bg-color: #2a2a2a;          /* темно-серый */
-  --text-color: #e8e6e3;        /* теплый светлый текст */
-  --card-color: #3a3a3a;        /* карточки чуть светлее */
-  --accent-color: #a6b4ce;      /* пастельный сиреневый */
-  --border-color: #555555;      /* темная граница */
+  --bg-color: #2a2a2a;
+  --text-color: #e8e6e3;
+  --card-color: #3a3a3a;
+  --accent-color: #a6b4ce;
+  --border-color: #555555;
+  --button-color: #4a4a4a; /* Темная кнопка для темной темы */
+  --button-text-color: #e8e6e3;
+  --button-hover-color: #5a5a5a;
 }
 
 [data-theme="neutral"] {
   /* НЕЙТРАЛЬНАЯ ТЕМА - тёмно-бежевые карточки */
   --bg-color: linear-gradient(135deg, #8b7355 0%, #d2b48c 50%, #f5f5dc 100%);
-  --text-color: #5d4037;        /* тёмно-коричневый текст */
-  --card-color: #a1887f;        /* тёмно-бежевый для карточек */
-  --accent-color: #8d6e63;      /* бежево-коричневый акцент */
-  --border-color: #bcaaa4;      /* светлый бежевый для границ */
+  --text-color: #5d4037;
+  --card-color: #a1887f;
+  --accent-color: #8d6e63;
+  --border-color: #bcaaa4;
+  --button-color: #8d6e63; /* Бежево-коричневая кнопка для нейтральной темы */
+  --button-text-color: #ffffff;
+  --button-hover-color: #7d5e53;
 }
 
 /* ===== БАЗОВЫЕ СТИЛИ ===== */
