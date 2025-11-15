@@ -63,18 +63,18 @@ main.profile {
 }
 
 /* Кнопки */
-button {
-  background-color: var(--button-color);
-  color: var(--button-text-color);
+button:not(.like-btn):not(.delete-post-btn) {
+  background-color: var(--accent-color);
+  color: white;
   border: none;
   border-radius: 8px;
   padding: 10px 18px;
   cursor: pointer;
   font-weight: bold;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
-button:hover {
+button:hover:not(.like-btn):not(.delete-post-btn) {
   background-color: var(--button-hover-color);
   transform: translateY(-1px);
 }
@@ -90,18 +90,18 @@ button:hover {
 }
 
 .add-post-btn {
-  background-color: var(--accent-color); /* БЫЛО: #1861ff */
-  color: white;
+  background: var(--accent-color);
   padding: 8px 14px;
   font-size: 14px;
   border-radius: 8px;
   border: none;
+  color: white;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
 .add-post-btn:hover {
-  background-color: var(--button-hover-color); /* БЫЛО: #1450d8 */
+  background: var(--button-hover-color);
   transform: translateY(-1px);
 }
 
@@ -209,10 +209,10 @@ button:hover {
 .settings-card select {
   width: 100%;
   padding: 14px 16px;
-  border: 2px solid #d7ccc8;
+  border: 2px solid var(--border-color);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.95);
-  color: #5d4037;
+  background: var(--card-color);
+  color: var(--text-color);
   font-size: 16px;
   margin-bottom: 25px;
   box-sizing: border-box;
@@ -223,16 +223,15 @@ button:hover {
 .settings-card input:focus,
 .settings-card textarea:focus,
 .settings-card select:focus {
-  border-color: #a1887f;
+  border-color: var(--accent-color);
   outline: none;
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 0 0 3px rgba(161, 136, 127, 0.2);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
 }
 
 .settings-card input::placeholder,
 .settings-card textarea::placeholder {
-  color: #a1887f;
-  opacity: 0.7;
+  color: var(--text-color);
+  opacity: 0.5;
 }
 
 /* Красивая кнопка сохранения */
@@ -260,11 +259,22 @@ button:hover {
 /* Стильный select */
 .settings-card select {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%235d4037' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 16px center;
   background-size: 12px;
   padding-right: 40px;
+  cursor: pointer;
+}
+
+/* Стрелка для светлой и нейтральной тем */
+[data-theme="light"] .settings-card select,
+[data-theme="neutral"] .settings-card select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%235d4037' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+}
+
+/* Стрелка для темной темы */
+[data-theme="dark"] .settings-card select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23e8e6e3' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E") !important;
 }
 
 /* Улучшаем текстовое поле */
@@ -273,9 +283,4 @@ button:hover {
   min-height: 100px;
   font-family: inherit;
   line-height: 1.5;
-}
-
-.change-status-btn {
-  background-color: var(--button-color);
-  color: var(--button-text-color);
 }

@@ -4,11 +4,9 @@
   --bg-color: #f8f5f2;
   --text-color: #4a4a4a;
   --card-color: #ffffff;
-  --accent-color: #d4a5a5;
+  --accent-color: #4a90e2; /* Бледно-голубой для всех тем */
   --border-color: #f0e6e6;
-  --button-color: #e8e8e8; /* Серая кнопка для светлой темы */
-  --button-text-color: #4a4a4a;
-  --button-hover-color: #d8d8d8;
+  --button-hover-color: #3a7bc8; /* Темнее при наведении */
 }
 
 [data-theme="dark"] {
@@ -16,11 +14,9 @@
   --bg-color: #2a2a2a;
   --text-color: #e8e6e3;
   --card-color: #3a3a3a;
-  --accent-color: #a6b4ce;
+  --accent-color: #4a90e2; /* Бледно-голубой */
   --border-color: #555555;
-  --button-color: #4a4a4a; /* Темная кнопка для темной темы */
-  --button-text-color: #e8e6e3;
-  --button-hover-color: #5a5a5a;
+  --button-hover-color: #3a7bc8;
 }
 
 [data-theme="neutral"] {
@@ -28,11 +24,9 @@
   --bg-color: linear-gradient(135deg, #8b7355 0%, #d2b48c 50%, #f5f5dc 100%);
   --text-color: #5d4037;
   --card-color: #a1887f;
-  --accent-color: #8d6e63;
+  --accent-color: #4a90e2; /* Бледно-голубой вместо коричневого */
   --border-color: #bcaaa4;
-  --button-color: #8d6e63; /* Бежево-коричневая кнопка для нейтральной темы */
-  --button-text-color: #ffffff;
-  --button-hover-color: #7d5e53;
+  --button-hover-color: #3a7bc8;
 }
 
 /* ===== БАЗОВЫЕ СТИЛИ ===== */
@@ -160,3 +154,35 @@ header {
     display: none;
   }
 }
+
+/* ===== ИСПРАВЛЕНИЯ ДЛЯ ТЕМНОЙ ТЕМЫ ===== */
+[data-theme="dark"] .settings-card input,
+[data-theme="dark"] .settings-card textarea,
+[data-theme="dark"] .settings-card select {
+  background: #3a3a3a;
+  color: #e8e6e3;
+  border: 2px solid #555555;
+}
+
+/* ДОБАВЬТЕ ЭТО - конкретно для select */
+[data-theme="dark"] select,
+[data-theme="dark"] #theme {
+  background: #3a3a3a !important;
+  color: #e8e6e3 !important;
+  border: 2px solid #555555 !important;
+}
+
+[data-theme="dark"] .settings-card input::placeholder,
+[data-theme="dark"] .settings-card textarea::placeholder {
+  color: #a0a0a0;
+  opacity: 0.7;
+}
+
+[data-theme="dark"] .settings-card input:focus,
+[data-theme="dark"] .settings-card textarea:focus,
+[data-theme="dark"] .settings-card select:focus {
+  border-color: #4a90e2;
+  background: #444444;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
