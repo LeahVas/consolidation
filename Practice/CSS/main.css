@@ -4,9 +4,9 @@
   --bg-color: #f8f5f2;
   --text-color: #4a4a4a;
   --card-color: #ffffff;
-  --accent-color: #4a90e2; /* Бледно-голубой для всех тем */
+  --accent-color: #d4a5a5; /* Нежно-розовый для светлой темы */
   --border-color: #f0e6e6;
-  --button-hover-color: #3a7bc8; /* Темнее при наведении */
+  --button-hover-color: #c49595; /* Темнее розовый при наведении */
 }
 
 [data-theme="dark"] {
@@ -14,7 +14,7 @@
   --bg-color: #2a2a2a;
   --text-color: #e8e6e3;
   --card-color: #3a3a3a;
-  --accent-color: #4a90e2; /* Бледно-голубой */
+  --accent-color: #4a90e2; /* Синий только для темной темы */
   --border-color: #555555;
   --button-hover-color: #3a7bc8;
 }
@@ -24,9 +24,9 @@
   --bg-color: linear-gradient(135deg, #8b7355 0%, #d2b48c 50%, #f5f5dc 100%);
   --text-color: #5d4037;
   --card-color: #a1887f;
-  --accent-color: #4a90e2; /* Бледно-голубой вместо коричневого */
+  --accent-color: #8d6e63; /* Бежево-коричневый для нейтральной темы */
   --border-color: #bcaaa4;
-  --button-hover-color: #3a7bc8;
+  --button-hover-color: #795548;
 }
 
 /* ===== БАЗОВЫЕ СТИЛИ ===== */
@@ -107,7 +107,7 @@ header {
 }
 
 .logout-btn:hover {
-  opacity: 0.9;
+  background: var(--button-hover-color);
 }
 
 /* Кнопка меню */
@@ -164,7 +164,6 @@ header {
   border: 2px solid #555555;
 }
 
-/* ДОБАВЬТЕ ЭТО - конкретно для select */
 [data-theme="dark"] select,
 [data-theme="dark"] #theme {
   background: #3a3a3a !important;
