@@ -1,0 +1,174 @@
+/* ===== СТИЛИ ДЛЯ ГАЛЕРЕИ ===== */
+.gallery-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 100px auto 60px;
+  padding: 0 20px;
+}
+
+.gallery-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.gallery-header h1 {
+  color: var(--text-color);
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.gallery-header p {
+  color: var(--text-color);
+  opacity: 0.8;
+  font-size: 1.1rem;
+}
+
+/* Сетка галереи */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+/* Карточка фотографии */
+.gallery-item {
+  background: var(--card-color);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Заглушка для фотографии */
+.photo-placeholder {
+  width: 100%;
+  height: 250px;
+  background: linear-gradient(135deg, var(--border-color) 0%, var(--card-color) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.photo-placeholder::before {
+  content: "📷";
+  font-size: 3rem;
+  opacity: 0.3;
+}
+
+.photo-placeholder::after {
+  content: "No photo yet";
+  position: absolute;
+  bottom: 15px;
+  color: var(--text-color);
+  opacity: 0.5;
+  font-size: 0.9rem;
+}
+
+/* Информация о фотографии */
+.photo-info {
+  padding: 20px;
+}
+
+.photo-info h3 {
+  color: var(--text-color);
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.photo-info p {
+  color: var(--text-color);
+  opacity: 0.7;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Кнопка добавления фото */
+.gallery-actions {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.add-photo-btn {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.add-photo-btn:hover {
+  background: var(--button-hover-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .gallery-container {
+    width: 95%;
+    margin: 80px auto 40px;
+    padding: 0 10px;
+  }
+
+  .gallery-header h1 {
+    font-size: 2rem;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .photo-placeholder {
+    height: 200px;
+  }
+
+  .photo-placeholder::before {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .gallery-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .add-photo-btn {
+    width: 100%;
+    padding: 12px 20px;
+  }
+}
+
+/* Специфические стили для разных тем */
+[data-theme="light"] .photo-placeholder {
+  background: linear-gradient(135deg, #f0e6e6 0%, #ffffff 100%);
+}
+
+[data-theme="dark"] .photo-placeholder {
+  background: linear-gradient(135deg, #555555 0%, #3a3a3a 100%);
+}
+
+[data-theme="neutral"] .photo-placeholder {
+  background: linear-gradient(135deg, #bcaaa4 0%, #a1887f 100%);
+}
