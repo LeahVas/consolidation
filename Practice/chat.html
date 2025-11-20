@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages — My Profile</title>
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/profile.css">
+    <link rel="stylesheet" href="CSS/chat.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">My Profile</div>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <nav class="nav-container" id="navContainer">
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="settings.html">Settings</a>
+                <a href="chat.html" class="active">Messages</a>
+            </div>
+        </nav>
+        <button class="logout-btn">Log out</button>
+    </header>
+
+    <main class="chat-conteiner">
+        <selection class="chat-sidebar">
+            <div class="chats-header">
+                <h2>Messages</h2>
+                <button class="new-chat-btn">＋ New Chat</button>
+            </div>
+
+            <div class="chats-list">
+                <div class="chat-item active" data-chat="user1">
+                    <div class="chat-avatar">👩‍💻</div>
+                    <div class="chat-info">
+                        <h3>Alex Johnson</h3>
+                        <p>See you tomorrow!</p>
+                        <span class="chat-time">10:30 AM</span>
+                    </div>
+                </div>
+
+                <div class="chat-item" data-chat="user2">
+                    <div class="chat-avatar">👨‍🎨</div>
+                    <div class="chat-info">
+                        <h3>Sarah Miller</h3>
+                        <p>Thanks for the help!</p>
+                        <span class="chat-time">Yesterday</span>
+                    </div>
+                </div>
+                <div class="chat-item" data-chat="user3">
+                    <div class="chat-avatar">👨‍💼</div>
+                    <div class="chat-info">
+                        <h3>Mike Chen</h3>
+                        <p>Are you available?</p>
+                        <span class="chat-time">Monday</span>
+                    </div>
+                </div>
+            </div>
+        </selection>
+
+        <!-- Окно чата -->
+        <section class="chat-window">
+            <div class="chat-header">
+                <div class="current-chat-info">
+                    <div class="chat-avatar">👩‍💻</div>
+                    <div>
+                        <h3>Alex Johnson</h3>
+                        <p>Online</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="messages-container" id="messagesContainer">
+                <!-- Сообщения будут добавляться сюда -->
+                <div class="message received">
+                    <div class="message-content">
+                        <p>Hey! How's your project going?</p>
+                        <span class="message-time">10:25 AM</span>
+                    </div>
+                </div>
+
+                <div class="message sent">
+                    <div class="message-content">
+                        <p>It's going great! Just finished the gallery page.</p>
+                        <span class="message-time">10:26 AM</span>
+                    </div>
+                </div>
+
+                <div class="message received">
+                    <div class="message-content">
+                        <p>That's awesome! Can't wait to see it. Let's meet tomorrow to discuss?</p>
+                        <span class="message-time">10:28 AM</span>
+                    </div>
+                </div>
+
+                <div class="message sent">
+                    <div class="message-content">
+                        <p>Sure! See you tomorrow 😊</p>
+                        <span class="message-time">10:30 AM</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-input-container">
+                <input type="text" id="messageInput" placeholder="Type a message...">
+                <button id="sendMessageBtn">Send</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="JS/chat.js"></script>
+    <script src="JS/main.js"></script>
+</body>
+
+</html>
+
+</main>
+</body>
+
+</html>
