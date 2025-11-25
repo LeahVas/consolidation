@@ -22,11 +22,16 @@
 [data-theme="neutral"] {
   /* НЕЙТРАЛЬНАЯ ТЕМА - тёмно-бежевые карточки */
   --bg-color: linear-gradient(135deg, #8b7355 0%, #d2b48c 50%, #f5f5dc 100%);
-  --text-color: #5d4037;
+  --text-color: #000000;
   --card-color: #a1887f;
   --accent-color: #8d6e63; /* Бежево-коричневый для нейтральной темы */
   --border-color: #bcaaa4;
   --button-hover-color: #795548;
+}
+/* Чтобы хедер остался с оригинальным цветом */
+[data-theme="neutral"] header,
+[data-theme="neutral"] header * {
+  color: #5d4037 !important; /* Оригинальный цвет для хедера */
 }
 
 /* ===== БАЗОВЫЕ СТИЛИ ===== */
@@ -184,4 +189,3 @@ header {
   background: #444444;
   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
 }
-

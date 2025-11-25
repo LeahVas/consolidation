@@ -288,3 +288,11 @@ button:hover:not(.like-btn):not(.delete-post-btn) {
   font-family: inherit;
   line-height: 1.5;
 } 
+/* Гарантируем читаемость в нейтральной теме */
+[data-theme="neutral"] main.profile,
+[data-theme="neutral"] .settings-container {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(5px);
+}
+
+
