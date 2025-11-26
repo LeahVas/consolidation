@@ -1,5 +1,5 @@
 // chat.js - функциональность мессенджера
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // 1. НАХОДИМ ВСЕ НУЖНЫЕ ЭЛЕМЕНТЫ НА СТРАНИЦЕ
     const messageInput = document.getElementById('messageInput');
     const sendMessageBtn = document.getElementById('sendMessageBtn');
@@ -11,14 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function saveMessage(chatId, message, isSent = true) {
         // Получаем текущие сообщения для этого чата
         const existingMessages = JSON.parse(localStorage.getItem(`chat_${chatId}`)) || [];
-        
+
         // Добавляем новое сообщение
         existingMessages.push({
             text: message,
             isSent: isSent,
             time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         });
-        
+
         // Сохраняем обратно в localStorage
         localStorage.setItem(`chat_${chatId}`, JSON.stringify(existingMessages));
     }
@@ -33,22 +33,22 @@ document.addEventListener('DOMContentLoaded', function() {
     function displayMessages(chatId) {
         const messages = loadMessages(chatId);
         messagesContainer.innerHTML = ''; // Очищаем контейнер
-        
+
         // Для каждого сообщения создаем HTML-элемент
         messages.forEach(msg => {
             const messageElement = document.createElement('div');
             messageElement.className = `message ${msg.isSent ? 'sent' : 'received'}`;
-            
+
             messageElement.innerHTML = `
                 <div class="message-content">
                     <p>${msg.text}</p>
                     <span class="message-time">${msg.time}</span>
                 </div>
             `;
-            
+
             messagesContainer.appendChild(messageElement);
         });
-        
+
         // Прокручиваем вниз к последнему сообщению
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
@@ -56,27 +56,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // 5. ФУНКЦИЯ ОТПРАВКИ СООБЩЕНИЯ
     function sendMessage() {
         const messageText = messageInput.value.trim();
-        
+
         // Проверяем, что сообщение не пустое
         if (messageText === '') {
             return; // Выходим из функции если сообщение пустое
         }
-        
+
         // Находим активный чат
         const activeChat = document.querySelector('.chat-item.active');
         if (!activeChat) return;
-        
+
         const chatId = activeChat.dataset.chat;
-        
+
         // Сохраняем отправленное сообщение
         saveMessage(chatId, messageText, true);
-        
+
         // Показываем сообщение в чате
         displayMessages(chatId);
-        
+
         // Очищаем поле ввода
         messageInput.value = '';
-        
+
         // Имитируем ответ (можно убрать в будущем)
         simulateResponse(chatId);
     }
@@ -85,20 +85,20 @@ document.addEventListener('DOMContentLoaded', function() {
     function simulateResponse(chatId) {
         setTimeout(() => {
             const responses = [
-                "Привет! Как твои дела?",
-                "Интересно! Расскажи подробнее",
-                "Я понимаю тебя",
-                "Это здорово! 🎉",
-                "Спасибо, что поделился этим",
-                "Что ты об этом думаешь?",
-                "У меня тоже так было!",
-                "Продолжай в том же духе! 💪"
+                "Hi! How are you?",
+                "Interesting! Tell me more",
+                "I understand",
+                "That's great! 🎉",
+                "Thanks for sharing",
+                "What do you think?",
+                "That happened to me too!",
+                "Keep up the good work! 💪"
             ];
-            
+
             const randomResponse = responses[Math.floor(Math.random() * responses.length)];
             saveMessage(chatId, randomResponse, false);
             displayMessages(chatId);
-            
+
         }, 1000 + Math.random() * 2000); // Случайная задержка 1-3 секунды
     }
 
@@ -108,10 +108,10 @@ document.addEventListener('DOMContentLoaded', function() {
         chatItems.forEach(item => {
             item.classList.remove('active');
         });
-        
+
         // Добавляем активный класс выбранному чату
         chatElement.classList.add('active');
-        
+
         // Загружаем сообщения для этого чата
         const chatId = chatElement.dataset.chat;
         displayMessages(chatId);
@@ -121,35 +121,35 @@ document.addEventListener('DOMContentLoaded', function() {
     function createNewChat() {
         // Создаем уникальный ID для нового чата
         const newChatId = 'user' + (Date.now());
-        const newChatName = 'Новый контакт';
-        
+        const newChatName = 'New contact';
+
         // Создаем HTML для нового чата
         const newChatHTML = `
             <div class="chat-item" data-chat="${newChatId}">
                 <div class="chat-avatar">👤</div>
                 <div class="chat-info">
                     <h3>${newChatName}</h3>
-                    <p>Начните общение</p>
-                    <span class="chat-time">Сейчас</span>
+                    <p>Start a conversation</p>
+                    <span class="chat-time">Now</span>
                 </div>
             </div>
         `;
-        
+
         // Добавляем новый чат в список
         document.querySelector('.chats-list').insertAdjacentHTML('afterbegin', newChatHTML);
-        
+
         // Переключаемся на новый чат
         const newChatElement = document.querySelector(`[data-chat="${newChatId}"]`);
         switchChat(newChatElement);
-        
+
         // Добавляем обработчик клика для нового чата
-        newChatElement.addEventListener('click', function() {
+        newChatElement.addEventListener('click', function () {
             switchChat(this);
         });
-        
+
         // Показываем приветственное сообщение
         setTimeout(() => {
-            saveMessage(newChatId, "Привет! Рад познакомиться! 👋", false);
+            saveMessage(newChatId, "Hello! Nice to meet you! 👋", false);
             displayMessages(newChatId);
         }, 500);
     }
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
     sendMessageBtn.addEventListener('click', sendMessage);
 
     // Отправка сообщения по нажатию Enter
-    messageInput.addEventListener('keypress', function(e) {
+    messageInput.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
             sendMessage();
         }
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Переключение между существующими чатами
     chatItems.forEach(item => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function () {
             switchChat(this);
         });
     });
@@ -177,15 +177,15 @@ document.addEventListener('DOMContentLoaded', function() {
     newChatBtn.addEventListener('click', createNewChat);
 
     // 10. ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
-    
+
     // Загружаем сообщения для активного чата
     const activeChat = document.querySelector('.chat-item.active');
     if (activeChat) {
         displayMessages(activeChat.dataset.chat);
     }
-    
+
     // Фокусируемся на поле ввода сообщения
     messageInput.focus();
-    
-    console.log('Мессенджер загружен! 💬');
+
+    console.log('Messenger is loaded! 💬');
 });

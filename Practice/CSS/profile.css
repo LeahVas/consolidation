@@ -2,7 +2,7 @@
 main.profile {
   width: 90%;
   max-width: 700px;
-  background: var(--card-color);
+  background: var(--card-color); /* Теперь использует переменную темы */
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -55,7 +55,7 @@ main.profile {
   width: 250px;
   height: 350px;
   border-radius: 20px;
-  border: 4px solid var(--accent-color); /* Теперь цвет рамки зависит от темы */
+  border: 4px solid var(--accent-color);
   margin: 0 auto 20px;
   object-fit: cover;
   display: block;
@@ -287,12 +287,7 @@ button:hover:not(.like-btn):not(.delete-post-btn) {
   min-height: 100px;
   font-family: inherit;
   line-height: 1.5;
-} 
-/* Гарантируем читаемость в нейтральной теме */
-[data-theme="neutral"] main.profile,
-[data-theme="neutral"] .settings-container {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(5px);
 }
+
 
 

@@ -1,4 +1,4 @@
-// main.js — исправленная надёжная версия
+// main.js — полная исправленная версия с мобильным меню
 document.addEventListener('DOMContentLoaded', () => {
 
   // Инициализация начальных постов, если их нет
@@ -27,14 +27,65 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* -------------------------
-     1) Меню мобильное
+     1) МОБИЛЬНОЕ МЕНЮ - ИСПРАВЛЕННАЯ ВЕРСИЯ
   ------------------------- */
   const menuToggle = document.getElementById('menuToggle');
   const navContainer = document.getElementById('navContainer');
+  const body = document.body;
+
   if (menuToggle && navContainer) {
-    menuToggle.addEventListener('click', () => navContainer.classList.toggle('active'));
+    // Функция для открытия/закрытия меню
+    function toggleMobileMenu() {
+      const isActive = navContainer.classList.toggle('active');
+      menuToggle.textContent = isActive ? '✕' : '☰';
+      
+      // Блокируем прокрутку body когда меню открыто
+      if (isActive) {
+        body.style.overflow = 'hidden';
+      } else {
+        body.style.overflow = '';
+      }
+    }
+
+    // Функция для закрытия меню
+    function closeMobileMenu() {
+      navContainer.classList.remove('active');
+      menuToggle.textContent = '☰';
+      body.style.overflow = '';
+    }
+
+    // Обработчик клика на кнопку меню
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMobileMenu();
+    });
+
+    // Закрытие меню при клике на ссылку
     document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => navContainer.classList.remove('active'));
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Закрытие меню при клике вне его области
+    document.addEventListener('click', (e) => {
+      if (navContainer.classList.contains('active') && 
+          !navContainer.contains(e.target) && 
+          e.target !== menuToggle) {
+        closeMobileMenu();
+      }
+    });
+
+    // Закрытие меню при нажатии Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navContainer.classList.contains('active')) {
+        closeMobileMenu();
+      }
+    });
+
+    // Закрытие меню при изменении размера окна (на случай поворота устройства)
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && navContainer.classList.contains('active')) {
+        closeMobileMenu();
+      }
     });
   }
 
@@ -259,4 +310,35 @@ document.addEventListener('DOMContentLoaded', () => {
     renderPosts();
   }
 
+  /* -------------------------
+     5) Дополнительные улучшения для мобильных устройств
+  ------------------------- */
+  
+  // Предотвращение масштабирования при двойном тапе (для iOS)
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', function (event) {
+    const now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+      event.preventDefault();
+    }
+    lastTouchEnd = now;
+  }, false);
+
+  // Улучшение обработки касаний для кнопок
+  document.querySelectorAll('button, a').forEach(element => {
+    element.addEventListener('touchstart', function() {
+      this.style.transform = 'scale(0.98)';
+    });
+    
+    element.addEventListener('touchend', function() {
+      this.style.transform = '';
+    });
+  });
+
+  // Оптимизация для мобильных устройств
+  if ('ontouchstart' in window) {
+    document.body.classList.add('touch-device');
+  }
+
+  console.log('My Profile app loaded successfully! 🚀');
 });

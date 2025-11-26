@@ -143,16 +143,17 @@
     gap: 15px;
 }
 
-.massage {
+/* ИСПРАВЛЕНО: massage -> message */
+.message {
     display: flex;
     max-width: 70%;
 }
 
-.massage.received {
+.message.received {
     align-self: flex-start;
 }
 
-.massage.sent {
+.message.sent {
     align-self: flex-end;
 }
 
@@ -162,13 +163,13 @@
     position: relative;
 }
 
-.massage.received .message-content {
+.message.received .message-content {
     background: var(--card-color);
     border: 1px solid var(--border-color);
     color: var(--text-color);
 }
 
-.massage.sent .message-content {
+.message.sent .message-content {
     background: var(--accent-color);
     color: white;
 }

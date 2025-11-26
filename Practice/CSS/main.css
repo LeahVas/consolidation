@@ -56,7 +56,7 @@ header {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 1000;
   border-bottom: 1px solid var(--border-color);
   width: 100%;
   box-sizing: border-box;
@@ -67,6 +67,7 @@ header {
   font-size: 22px;
   color: var(--text-color);
   font-weight: bold;
+  z-index: 1001;
 }
 
 /* Контейнер навигации */
@@ -117,13 +118,15 @@ header {
 
 /* Кнопка меню */
 .menu-toggle {
-  display: none;
+   display: none;
   background: none;
   border: none;
   font-size: 24px;
   cursor: pointer;
   color: var(--text-color);
   padding: 5px;
+  z-index: 1001; 
+  position: relative;
 }
 
 /* Адаптивность */
@@ -134,14 +137,21 @@ header {
   
   .nav-container {
     display: none;
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
     background: var(--card-color);
     flex-direction: column;
-    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px 20px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    z-index: 999;
+    transform: none; 
+    width: 100%;
+    height: 100vh;
   }
   
   .nav-container.active {
@@ -156,8 +166,20 @@ header {
   }
   
   .logout-btn {
+    margin-top: 20px;
+    padding: 12px 20px;
+    font-size: 16px;
+    display: block !important;
+  }
+  header .logout-btn {
     display: none;
   }
+}
+
+/* Стиль для активной ссылки */
+.nav-links a.active {
+  background: var(--accent-color);
+  color: white;
 }
 
 /* ===== ИСПРАВЛЕНИЯ ДЛЯ ТЕМНОЙ ТЕМЫ ===== */
