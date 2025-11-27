@@ -27,67 +27,72 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* -------------------------
-     1) МОБИЛЬНОЕ МЕНЮ - ИСПРАВЛЕННАЯ ВЕРСИЯ
-  ------------------------- */
-  const menuToggle = document.getElementById('menuToggle');
-  const navContainer = document.getElementById('navContainer');
-  const body = document.body;
+  1) МОБИЛЬНОЕ МЕНЮ - ВЫДВИГАЮЩАЯСЯ ПАНЕЛЬ СПРАВА
+------------------------- */
+const menuToggle = document.getElementById('menuToggle');
+const navContainer = document.getElementById('navContainer');
+const body = document.body;
 
-  if (menuToggle && navContainer) {
-    // Функция для открытия/закрытия меню
-    function toggleMobileMenu() {
-      const isActive = navContainer.classList.toggle('active');
-      menuToggle.textContent = isActive ? '✕' : '☰';
-      
-      // Блокируем прокрутку body когда меню открыто
-      if (isActive) {
-        body.style.overflow = 'hidden';
-      } else {
-        body.style.overflow = '';
-      }
-    }
+// Создаем overlay для затемнения фона
+const navOverlay = document.createElement('div');
+navOverlay.className = 'nav-overlay';
+document.body.appendChild(navOverlay);
 
-    // Функция для закрытия меню
-    function closeMobileMenu() {
-      navContainer.classList.remove('active');
-      menuToggle.textContent = '☰';
-      body.style.overflow = '';
-    }
-
-    // Обработчик клика на кнопку меню
-    menuToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleMobileMenu();
-    });
-
-    // Закрытие меню при клике на ссылку
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', closeMobileMenu);
-    });
-
-    // Закрытие меню при клике вне его области
-    document.addEventListener('click', (e) => {
-      if (navContainer.classList.contains('active') && 
-          !navContainer.contains(e.target) && 
-          e.target !== menuToggle) {
-        closeMobileMenu();
-      }
-    });
-
-    // Закрытие меню при нажатии Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && navContainer.classList.contains('active')) {
-        closeMobileMenu();
-      }
-    });
-
-    // Закрытие меню при изменении размера окна (на случай поворота устройства)
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 768 && navContainer.classList.contains('active')) {
-        closeMobileMenu();
-      }
-    });
+if (menuToggle && navContainer) {
+  // Функция для открытия меню
+  function openMobileMenu() {
+    navContainer.classList.add('active');
+    navOverlay.classList.add('active');
+    body.style.overflow = 'hidden';
+    menuToggle.textContent = '✕';
   }
+
+  // Функция для закрытия меню
+  function closeMobileMenu() {
+    navContainer.classList.remove('active');
+    navOverlay.classList.remove('active');
+    body.style.overflow = '';
+    menuToggle.textContent = '☰';
+  }
+
+  // Обработчик клика на кнопку меню
+  menuToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (navContainer.classList.contains('active')) {
+      closeMobileMenu();
+    } else {
+      openMobileMenu();
+    }
+  });
+
+  // Закрытие меню при клике на overlay
+  navOverlay.addEventListener('click', closeMobileMenu);
+
+  // Закрытие меню при клике на ссылку
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+
+  // Закрытие меню при клике на кнопку выхода в мобильном меню
+  const mobileLogoutBtn = navContainer.querySelector('.logout-btn');
+  if (mobileLogoutBtn) {
+    mobileLogoutBtn.addEventListener('click', closeMobileMenu);
+  }
+
+  // Закрытие меню при нажатии Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navContainer.classList.contains('active')) {
+      closeMobileMenu();
+    }
+  });
+
+  // Закрытие меню при изменении размера окна
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && navContainer.classList.contains('active')) {
+      closeMobileMenu();
+    }
+  });
+}
 
   /* -------------------------
      2) Profile info (settings <-> index)
