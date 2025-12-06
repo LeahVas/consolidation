@@ -4,9 +4,10 @@
   --bg-color: #f8f5f2;
   --text-color: #4a4a4a;
   --card-color: #ffffff;
-  --accent-color: #d4a5a5; /* Нежно-розовый для светлой темы */
+  --accent-color: #d4a5a5;
   --border-color: #f0e6e6;
-  --button-hover-color: #c49595; /* Темнее розовый при наведении */
+  --button-hover-color: #c49595;
+  --font-family: 'Inter', sans-serif;
 }
 
 [data-theme="dark"] {
@@ -14,7 +15,7 @@
   --bg-color: #2a2a2a;
   --text-color: #e8e6e3;
   --card-color: #3a3a3a;
-  --accent-color: #4a90e2; /* Синий только для темной темы */
+  --accent-color: #4a90e2;
   --border-color: #555555;
   --button-hover-color: #3a7bc8;
 }
@@ -24,25 +25,45 @@
   --bg-color: linear-gradient(135deg, #8b7355 0%, #d2b48c 50%, #f5f5dc 100%);
   --text-color: #000000;
   --card-color: #a1887f;
-  --accent-color: #8d6e63; /* Бежево-коричневый для нейтральной темы */
+  --accent-color: #8d6e63;
   --border-color: #bcaaa4;
   --button-hover-color: #795548;
 }
+
 /* Чтобы хедер остался с оригинальным цветом */
 [data-theme="neutral"] header,
 [data-theme="neutral"] header * {
-  color: #5d4037 !important; /* Оригинальный цвет для хедера */
+  color: #5d4037 !important;
 }
 
 /* ===== БАЗОВЫЕ СТИЛИ ===== */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-family);
   background: var(--bg-color);
   color: var(--text-color);
   min-height: 100vh;
   transition: background 0.4s, color 0.4s;
   background-attachment: fixed;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Универсальные стили для текста */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family);
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+p {
+  font-family: var(--font-family);
+  font-weight: 400;
+  margin: 0 0 1rem 0;
+}
+
+button, input, textarea, select {
+  font-family: var(--font-family);
 }
 
 /* ===== ОБЩИЙ HEADER ДЛЯ ВСЕХ СТРАНИЦ ===== */
@@ -66,7 +87,7 @@ header {
 .logo {
   font-size: 22px;
   color: var(--text-color);
-  font-weight: bold;
+  font-weight: 700;
   z-index: 1001;
 }
 
@@ -89,15 +110,26 @@ header {
 .nav-links a {
   color: var(--text-color);
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 500;
   transition: 0.3s;
   padding: 5px 10px;
   border-radius: 6px;
+  font-family: var(--font-family);
 }
 
 .nav-links a:hover {
   color: var(--accent-color);
   background: rgba(0,0,0,0.05);
+}
+
+.nav-links a.active {
+  background: var(--accent-color);
+  color: white;
+}
+
+.nav-links a.active:hover {
+  background: var(--button-hover-color);
+  color: white;
 }
 
 /* Кнопка выхода */
@@ -108,8 +140,9 @@ header {
   border-radius: 6px;
   padding: 8px 14px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 500;
   transition: 0.3s;
+  font-family: var(--font-family);
 }
 
 .logout-btn:hover {
@@ -118,15 +151,16 @@ header {
 
 /* Кнопка меню */
 .menu-toggle {
-   display: none;
+  display: none;
   background: none;
   border: none;
   font-size: 24px;
   cursor: pointer;
   color: var(--text-color);
   padding: 5px;
-  z-index: 1001; 
+  z-index: 1001;
   position: relative;
+  font-family: var(--font-family);
 }
 
 /* Адаптивность */
@@ -144,7 +178,7 @@ header {
     display: none;
     position: fixed;
     top: 0;
-    right: -300px; /* Скрыто за экраном справа */
+    right: -300px;
     width: 280px;
     height: 100vh;
     background: var(--card-color);
@@ -160,7 +194,7 @@ header {
   
   .nav-container.active {
     display: flex;
-    right: 0; /* Показываем панель */
+    right: 0;
   }
   
   /* Затемнение фона */
@@ -212,12 +246,6 @@ header {
     font-size: 16px;
     text-align: center;
   }
-}
-
-/* Стиль для активной ссылки */
-.nav-links a.active {
-  background: var(--accent-color);
-  color: white;
 }
 
 /* ===== ИСПРАВЛЕНИЯ ДЛЯ ТЕМНОЙ ТЕМЫ ===== */
